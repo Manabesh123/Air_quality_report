@@ -1,0 +1,594 @@
+--creating table for data files of air 2005 to 2015
+
+create table air2005 (
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2005 ;
+
+create table air2006 (
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2006 ;
+
+create table air2007 (
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2007 ;
+
+
+create table air2008 (
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2008 ;
+
+
+create table air2009 (
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2009 ;
+
+create table air2010 (
+	stn_code int,
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	agency varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2010 ;
+
+
+create table air2012 (
+	stn_code int,
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	agency varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2012 ;
+
+
+create table air2013 (
+	stn_code int,
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	agency varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2013 ;
+
+
+create table air2014 (
+	stn_code int,
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	agency varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2014 ;
+
+
+create table air2015 (
+	stn_code int,
+	sampling_date date,
+	state varchar,
+	city varchar,
+	location varchar,
+	agency varchar,
+	type varchar,
+	so2 numeric(6,2), 
+	no2 numeric(6,2),
+	pm10 numeric(6,2),
+	spm numeric(6,2)
+) ;
+
+select * from air2015 ;
+
+--below query returns avg so2 and year from air2005 dataset. its a practice method
+
+
+select city, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2,
+MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years 
+from air2009
+where city like 'Rourky%'
+group by city, MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+--below query will show output of year-wise comparison of max.min so2 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2 
+from air2005
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(so2)::numeric, 2) as max_so2 ,
+round(min(so2)::numeric, 2) as min_so2
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+--below query will show output of year-wise comparison of max.min no2 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2005
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(no2)::numeric, 2) as max_no2 ,
+round(min(no2)::numeric, 2) as min_no2
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+--below query will show output of year-wise comparison of max.min pm10 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2005
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(max(pm10)::numeric, 2) as max_pm10 ,
+round(min(pm10)::numeric, 2) as min_pm10
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+--below query will show output of year-wise comparison of avg so2 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2005avg
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(so2)::numeric, 2) as avg_so2 ,
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+--below query will show output of year-wise comparison of avg no2 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2005
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(no2)::numeric, 2) as avg_no2 ,
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
+
+--below query will show output of year-wise comparison of avg pm10 in a specific city from 2005-2015
+
+
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2005
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2006
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2007
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2008
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2009
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10,
+from air2010
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2012
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2013
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2014
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1)
+union all
+select MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1) as years, 
+round(avg(pm10)::numeric, 2) as avg_pm10 ,
+from air2015
+where city like 'Rourk%'
+group by MAKE_DATE(EXTRACT(YEAR FROM sampling_date)::integer, 1, 1);
+
